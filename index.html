@@ -19,6 +19,10 @@
       --card: rgba(255, 255, 255, 0.08);
       --card-border: rgba(255, 255, 255, 0.16);
       --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+      --party-1: #ff5f6d;
+      --party-2: #ffc371;
+      --party-3: #8f5cff;
+      --party-4: #30d5c8;
     }
 
     * {
@@ -44,6 +48,14 @@
       padding: 24px;
       perspective: 1400px;
       transform-style: preserve-3d;
+    }
+
+    body.party-mode {
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255, 95, 109, 0.28), transparent 22%),
+        radial-gradient(circle at 84% 14%, rgba(255, 195, 113, 0.24), transparent 20%),
+        radial-gradient(circle at 72% 82%, rgba(143, 92, 255, 0.22), transparent 24%),
+        linear-gradient(160deg, #08111f, #18102f 48%, #39153c);
     }
 
     .glow {
@@ -88,11 +100,34 @@
       pointer-events: none;
     }
 
+    body.party-mode .sparkles {
+      background-image:
+        radial-gradient(circle at 10% 16%, rgba(255,255,255,0.7) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 18% 72%, rgba(255,95,109,0.8) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 34% 32%, rgba(255,195,113,0.7) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 48% 64%, rgba(143,92,255,0.72) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 68% 22%, rgba(48,213,200,0.72) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 82% 58%, rgba(255,255,255,0.68) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 92% 18%, rgba(255,95,109,0.8) 0 1px, transparent 1.6px);
+      opacity: 0.58;
+      animation-duration: 5.5s;
+    }
+
     .wrap {
       width: min(1100px, 100%);
       position: relative;
       z-index: 1;
       transform-style: preserve-3d;
+    }
+
+    .title-priya {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      margin-top: 10px;
     }
 
     .hero {
@@ -101,6 +136,10 @@
       gap: 28px;
       align-items: stretch;
       transform-style: preserve-3d;
+    }
+
+    body.party-mode .hero {
+      animation: heroPulse 6s ease-in-out infinite;
     }
 
     .panel {
@@ -117,6 +156,11 @@
     .panel:hover {
       box-shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
       border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    body.party-mode .panel {
+      border-color: rgba(255,255,255,0.22);
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.46);
     }
 
     .main {
@@ -152,6 +196,11 @@
       box-shadow: 0 0 18px rgba(255, 122, 162, 0.7);
     }
 
+    body.party-mode .badge .dot {
+      background: linear-gradient(135deg, var(--party-1), var(--party-2));
+      box-shadow: 0 0 20px rgba(255, 95, 109, 0.85);
+    }
+
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(3rem, 8vw, 5.8rem);
@@ -167,6 +216,14 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+    }
+
+    body.party-mode h1 span {
+      background: linear-gradient(90deg, #fff, #ffc371 35%, #8f5cff 70%, #30d5c8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: titleShimmer 8s linear infinite;
     }
 
     .subtitle {
@@ -186,6 +243,11 @@
       line-height: 1.9;
       color: rgba(255,255,255,0.88);
       font-size: 1.02rem;
+    }
+
+    body.party-mode .message {
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
     }
 
     .message strong {
@@ -268,6 +330,10 @@
       transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     }
 
+    body.party-mode .memory-card {
+      animation: partyFloat 5s ease-in-out infinite;
+    }
+
     .memory-card:hover {
       transform: translateY(-6px) rotateX(4deg) rotateY(-4deg);
       box-shadow: 0 24px 54px rgba(0,0,0,0.3);
@@ -325,6 +391,12 @@
       border: 1px solid rgba(255,255,255,0.14);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 18px 40px rgba(0,0,0,0.24);
       overflow: hidden;
+    }
+
+    body.party-mode .candle-stage {
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.16), transparent 28%),
+        linear-gradient(180deg, rgba(28, 12, 45, 0.94), rgba(11, 13, 27, 0.98));
     }
 
     .candle-stage::before {
@@ -478,6 +550,27 @@
 
     .candle-stage.lit .candle-note {
       color: rgba(255,255,255,0.94);
+    }
+
+    .party-banner {
+      position: relative;
+      z-index: 1;
+      display: none;
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 18px;
+      background: linear-gradient(90deg, rgba(255,95,109,0.22), rgba(255,195,113,0.18), rgba(143,92,255,0.18), rgba(48,213,200,0.18));
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff;
+      text-align: center;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+
+    body.party-mode .party-banner {
+      display: block;
+      animation: bannerGlow 3.5s ease-in-out infinite;
     }
 
     .scene {
@@ -958,6 +1051,27 @@
       50% { transform: translate3d(10px, -18px, 40px) scale(1.05); }
     }
 
+    @keyframes heroPulse {
+      0%, 100% { filter: drop-shadow(0 0 0 rgba(255,255,255,0)); }
+      50% { filter: drop-shadow(0 0 32px rgba(255, 95, 109, 0.14)); }
+    }
+
+    @keyframes titleShimmer {
+      0% { filter: drop-shadow(0 0 0 rgba(255,255,255,0)); }
+      50% { filter: drop-shadow(0 0 24px rgba(255, 195, 113, 0.3)); }
+      100% { filter: drop-shadow(0 0 0 rgba(255,255,255,0)); }
+    }
+
+    @keyframes partyFloat {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-8px) rotate(1deg); }
+    }
+
+    @keyframes bannerGlow {
+      0%, 100% { transform: translateY(0); box-shadow: 0 0 0 rgba(255,255,255,0); }
+      50% { transform: translateY(-2px); box-shadow: 0 0 24px rgba(255,95,109,0.2); }
+    }
+
     @keyframes twinkle {
       0%, 100% { opacity: 0.24; }
       50% { opacity: 0.42; }
@@ -1094,9 +1208,10 @@
     <section class="hero">
       <div class="panel main">
         <div class="badge"><span class="dot"></span> A birthday page made with love</div>
+        <span class="title-priya">Priya</span>
         <h1><span>Happy Birthday</span><span>My Love</span></h1>
         <div class="subtitle">
-          Today is your day, and I wanted to turn this page into a little 3D dream for the one who has my heart now and will one day be my wife.
+          Today is your day, Priya, and I wanted to turn this page into a 3D dream for the one who has my heart now and will one day be my wife.
         </div>
 
         <div class="message">
@@ -1112,7 +1227,7 @@
 
         <div class="music-state" id="musicState">
           <span class="equalizer" aria-hidden="true"><span></span><span></span><span></span></span>
-          Background music ready
+          Birthday music ready
         </div>
 
         <div class="footer-note">
@@ -1144,6 +1259,7 @@
               <figcaption>Our future glow</figcaption>
             </figure>
           </div>
+          <div class="party-banner" id="partyBanner">Happy Birthday Priya, the party mode is on.</div>
           <div class="candle-stage" id="candleStage">
             <div class="candle-header">
               <div class="countdown-badge"><span class="dot"></span> 29 Aug 2026 • 12:00 AM</div>
@@ -1190,6 +1306,7 @@
     const candleStage = document.getElementById('candleStage');
     const candleNote = document.getElementById('candleNote');
     const countdownText = document.getElementById('countdownText');
+    const partyBanner = document.getElementById('partyBanner');
     const candleTarget = new Date('2026-08-29T00:00:00');
 
     let audioContext;
@@ -1202,7 +1319,7 @@
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       audioContext = new AudioContextClass();
       masterGain = audioContext.createGain();
-      masterGain.gain.value = 0.035;
+      masterGain.gain.value = 0.018;
       masterGain.connect(audioContext.destination);
     }
 
@@ -1236,7 +1353,7 @@
       musicOverlay.classList.remove('show');
       musicOverlay.hidden = true;
       musicOverlay.setAttribute('aria-hidden', 'true');
-      musicState.textContent = 'Background music playing';
+      musicState.textContent = 'Birthday music playing softly';
       musicBtn.textContent = 'Music Playing';
 
       const chords = [
@@ -1309,14 +1426,22 @@
 
       if (remaining <= 0) {
         candleStage.classList.add('lit');
+        document.body.classList.add('party-mode');
+        if (partyBanner) {
+          partyBanner.textContent = 'Party mode is on for Priya';
+        }
         countdownText.textContent = 'Candles are lit';
-        candleNote.textContent = 'The midnight candle moment has arrived. Make a wish and keep this glow close.';
+        candleNote.textContent = 'The midnight candle moment has arrived. Make a wish and let the whole page celebrate Priya.';
         return;
       }
 
       candleStage.classList.remove('lit');
+      document.body.classList.remove('party-mode');
+      if (partyBanner) {
+        partyBanner.textContent = 'The party wakes up at midnight';
+      }
       countdownText.textContent = formatCountdown(remaining);
-      candleNote.textContent = 'The candle lights will wake up automatically at 29 Aug 2026, 12:00 AM.';
+      candleNote.textContent = 'The candle lights will wake up automatically at 29 Aug 2026, 12:00 AM, then the whole page turns into party style.';
     }
 
     function createFloatingHeart() {
@@ -1388,8 +1513,6 @@
     });
 
     window.addEventListener('load', () => {
-      // Attempt autoplay; if the browser blocks it, the overlay remains visible.
-      tryStartMusic();
       burstHearts();
       updateCandleMoment();
       for (let i = 0; i < 14; i += 1) {
